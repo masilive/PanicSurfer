@@ -1,5 +1,45 @@
-﻿<h3>Maya</h3>
+﻿@using PanicSurfer.Data;
+
+<svg class="bg-light" width=@Width height=@Height>
+    <rect x="0" y="0" width="@DotWidth" height="@DotWidth" style="fill:@Colour;stroke-width:1;stroke:@Colour" />
+    <rect x="0" y="3" width="@DotWidth" height="@DotWidth" style="fill:yellow;stroke-width:1;stroke:yellow" />
+</svg>
 
 @code {
+    private Int16 DotWidth { get; set; } = 2;
+    private Int16 ColumnLength { get; set; } = 60;
+    public int Width { get; set; } = 1_200;
+    public int Height { get; set; } = 700;
+    public Tick[] TickArray { get; set; }
+    public string Colour { get; set; } = "blue";
+    protected override void OnInitialized()
+    {
+        try
+        {
+            var tickList = new List<Tick>();
+            Tick tick;
+            var i = 0;
 
+            using (var streamReader = new StreamReader(@"C:\Data\StepIndex\Ticks\Cipher.csv"))
+            {
+                while(!streamReader.EndOfStream)
+                {
+                    tick = new Tick(streamReader.ReadLine().Split('|'));
+
+                    if (i > 0 && tickList[i].Timestamp.AddSeconds(1) != tick.Timestamp)
+                    {
+                        tickList.Add(new Tick(tickList[i].Timestamp.AddSeconds(tickList.Count -  i)));
+                    }
+                    else
+                    {
+                        tickList.Add(tick);
+                    }
+                }
+            }
+        }
+        catch (Exception)
+        {
+            
+        }
+    }
 }
