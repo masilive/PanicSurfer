@@ -13,7 +13,7 @@
         <EnableDefaultCssItems>false</EnableDefaultCssItems>
 
         <!-- Display name -->
-        <ApplicationTitle>PanicSurfer</ApplicationTitle>
+        <ApplicationTitle>Panic Surfer</ApplicationTitle>
 
         <!-- App Identifier -->
         <ApplicationId>com.companyname.panicsurfer</ApplicationId>

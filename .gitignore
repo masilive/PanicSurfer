@@ -6,3 +6,5 @@ obj/Debug/
 obj/x64/
 
 *.sentinel
+
+bin/x64/Debug/
